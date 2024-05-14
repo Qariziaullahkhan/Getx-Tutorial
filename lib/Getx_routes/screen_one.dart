@@ -2,23 +2,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tutorial/Getx_routes/screen_one.dart';
+import 'package:getx_tutorial/Getx_routes/screen_two.dart';
 import 'package:getx_tutorial/controller/login_controller.dart';
 import 'package:getx_tutorial/widgets/Custom_appbar.dart';
 import 'package:http/http.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ScreenOne extends StatefulWidget {
+  final String name;
+  const ScreenOne({super.key,required this.name});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ScreenOne> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ScreenOne> {
   Logincontroller controller = Get.put(Logincontroller());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(titleText: "Home Screen"),
+      appBar: CustomAppbar(titleText: "Home Screen"+ widget.name),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -31,8 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             foregroundColor: Colors.blue
           ),
           onPressed: (){
-           Get.toNamed("/ScreenOne");
-          }, child: const Text("Home Button"))
+Get.toNamed("/ScreenTwo");          }, child: const Text("Screen One"))
         ],
       ),
     );
