@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tutorial/Getx_routes/screen_one.dart';
+import 'package:getx_tutorial/controller/Example_three_controller.dart';
 import 'package:getx_tutorial/controller/Example_two_controller.dart';
 import 'package:getx_tutorial/controller/counter_example.dart';
 import 'package:getx_tutorial/controller/login_controller.dart';
@@ -16,24 +17,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-ExampleTwoController exampleTwoController = Get.put(ExampleTwoController());
+  ExampleThreeController exampleThreeController = Get.put(ExampleThreeController());
+  bool Notification = false;
   @override
   Widget build(BuildContext context) {
+    print("Build");
     return Scaffold(
       
       appBar: CustomAppbar(titleText: "Home Screen",),
-      body: Column(
+      body: Row(
+mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Obx(()=>Container(
-            height: 200,
-            width: 200,
-            color: Colors.red.withOpacity(exampleTwoController.Opacity.value)
+          Text("Notification",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+Obx((){
+  return Switch(value:exampleThreeController.Notification.value , onChanged: (value){
+            exampleThreeController.setNotification(value);
 
-          ),),
-          Obx(()=>Slider(value: exampleTwoController.Opacity.value, onChanged: (value){
-            print(value);
-            exampleTwoController.setopacity(value);
-          })),
+          });
+}
+          ),
+
           
         ],
       )
