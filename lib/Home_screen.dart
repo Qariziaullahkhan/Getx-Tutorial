@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_tutorial/Getx_routes/screen_one.dart';
+import 'package:getx_tutorial/controller/Example_two_controller.dart';
 import 'package:getx_tutorial/controller/counter_example.dart';
 import 'package:getx_tutorial/controller/login_controller.dart';
 import 'package:getx_tutorial/widgets/Custom_appbar.dart';
@@ -15,21 +16,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CounterController controller = Get.put(CounterController());
-  int counter =0;
+ExampleTwoController exampleTwoController = Get.put(ExampleTwoController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       
       appBar: CustomAppbar(titleText: "Home Screen",),
-      body: Center(
-        child: Obx(()=>   Text(controller.counter.toString()),),
-      ),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-        controller.increamentcounter();
-      },
-      label: const Text("Add"),
-      icon: const Icon(Icons.add),),
+      body: Column(
+        children: [
+          Obx(()=>Container(
+            height: 200,
+            width: 200,
+            color: Colors.red.withOpacity(exampleTwoController.Opacity.value)
+
+          ),),
+          Obx(()=>Slider(value: exampleTwoController.Opacity.value, onChanged: (value){
+            print(value);
+            exampleTwoController.setopacity(value);
+          })),
+          
+        ],
+      )
     );
   }
 }
